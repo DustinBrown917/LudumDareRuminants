@@ -2,15 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameEvent : MonoBehaviour {
+[CreateAssetMenu(fileName = "New Game Event", menuName = "Game Event")]
+public class GameEvent : ScriptableObject {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    public string eventName;
+    public string description;
 }
