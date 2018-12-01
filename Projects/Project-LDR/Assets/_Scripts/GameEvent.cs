@@ -7,4 +7,5 @@ public class GameEvent : ScriptableObject {
 
     public string eventName;
     public string description;
+    public int difficulty;
 }
