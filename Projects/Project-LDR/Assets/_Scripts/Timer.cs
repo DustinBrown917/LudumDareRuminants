@@ -20,7 +20,7 @@ public class Timer : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        StartTimer();
+        
 	}
 	
     /// <summary>
@@ -28,7 +28,7 @@ public class Timer : MonoBehaviour {
     /// </summary>
     public void StartTimer()
     {
-        CoroutineManager.BeginCoroutine(RunTimer(startFromTime), cr_timerRunning, this);
+        CoroutineManager.BeginCoroutine(RunTimer(startFromTime), ref cr_timerRunning, this);
     }
 
     /// <summary>
@@ -56,6 +56,7 @@ public class Timer : MonoBehaviour {
             yield return null;
         }
 
+        SetLabelText(0.ToString());
         TimeUp.Invoke();
     }
 
@@ -69,7 +70,7 @@ public class Timer : MonoBehaviour {
         timerText.text = text;
         if (withAnimation)
         {
-            CoroutineManager.BeginCoroutine(CoroutineManager.ShrinkScaleFrom(timerTextTransform, new Vector3(2.0f, 2.0f, 2.0f), Vector3.one, 1.0f, cr_TextScaling), cr_TextScaling, this);
+            CoroutineManager.BeginCoroutine(CoroutineManager.ShrinkScaleFrom(timerTextTransform, new Vector3(2.0f, 2.0f, 2.0f), Vector3.one, 1.0f, cr_TextScaling), ref cr_TextScaling, this);
         }
     }
 
@@ -88,6 +89,7 @@ public class Timer : MonoBehaviour {
     /// <param name="displayedTime"></param>
     public void ResetTimer(int displayedTime)
     {
+        //CoroutineManager.HaltCoroutine(cr_timerRunning, this);
         SetLabelText(displayedTime.ToString(), false);
         timerGraphic.fillAmount = 1;
     }

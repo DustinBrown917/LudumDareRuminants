@@ -35,19 +35,19 @@ public class GameEventManager : MonoBehaviour {
     /// Gets a random event within range of the difficulty of the day.
     /// </summary>
     /// <returns></returns>
-    public GameEvent GetRandomEvent()
+    public GameEvent GetRandomEvent(int day)
     {
         int maximumIndex = 0;
 
         for(maximumIndex = 0; maximumIndex < gameEvents.Length; maximumIndex++)
         {
-            if(gameEvents[maximumIndex].difficulty >= DayManager.Instance.CurrentDay)
+            if(gameEvents[maximumIndex].difficulty >= day)
             {
                 break;
             }
         }
 
-        return gameEvents[UnityEngine.Random.Range(0, maximumIndex + 1)];
+        return gameEvents[UnityEngine.Random.Range(0, maximumIndex)];
     }
 
     /// <summary>

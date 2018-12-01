@@ -5,14 +5,14 @@ using UnityEngine;
 public static class CoroutineManager {
 
 	
-    public static void BeginCoroutine(IEnumerator routine, Coroutine container, MonoBehaviour parentBehaviour)
+    public static void BeginCoroutine(IEnumerator routine, ref Coroutine container, MonoBehaviour parentBehaviour)
     {
-        HaltCoroutine(container, parentBehaviour);
+        HaltCoroutine(ref container, parentBehaviour);
 
         container = parentBehaviour.StartCoroutine(routine);
     }
 
-    public static void HaltCoroutine(Coroutine container, MonoBehaviour parentBehaviour)
+    public static void HaltCoroutine(ref Coroutine container, MonoBehaviour parentBehaviour)
     {
         if(container != null)
         {

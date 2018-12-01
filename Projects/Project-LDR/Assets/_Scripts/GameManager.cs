@@ -6,7 +6,8 @@ public class GameManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		
+        DayManager.Instance.StartDay();
+        
 	}
 	
 	// Update is called once per frame
