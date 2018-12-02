@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DayManager : MonoBehaviour {
 
@@ -16,13 +17,18 @@ public class DayManager : MonoBehaviour {
     public const int DAY120_MAX_EVENTS = 7;
     public const int TIME_IN_DAY = 2;
 
+    public readonly string[] timeOfDay = { "Morning", "Evening" };
+
     [SerializeField] private Timer timer;
     [SerializeField] private EventDisplayPanel edPanel;
+    [SerializeField] private Text dayLabel;
     [SerializeField] private int timeAvailable_;
     public int TimeAvailable { get { return timeAvailable_; } }
 
     [SerializeField] private int currentDay_ = 1;
     public int CurrentDay { get { return currentDay_; } }
+
+    private int dedicatedStatIndex = -1;
 
     [SerializeField] private List<GameEvent> todaysEvents = new List<GameEvent>();
 
@@ -49,20 +55,33 @@ public class DayManager : MonoBehaviour {
         todaysEvents = new List<GameEvent>();
 
         OnDayEnd(new DayEndArgs(currentDay_));
+
+        StartDay();
     }
 
     public void StartDay()
     {
         currentDay_++;
+        dayLabel.text = "Day " + currentDay_.ToString() + ": " + timeOfDay[0];
         timeAvailable_ = TIME_IN_DAY;
 
         GetTodaysEvents();
 
         edPanel.SetEvents(todaysEvents);
 
+        ExecuteEvents();
+
         OnDayStarted(new DayStartArgs(currentDay_));
 
         timer.StartTimer();
+    }
+
+    public void ExecuteEvents()
+    {
+        foreach(GameEvent e in todaysEvents)
+        {
+            e.ExecuteEvent();
+        }
     }
 
     public void LoseTime()
@@ -77,21 +96,19 @@ public class DayManager : MonoBehaviour {
 
     public void HandleTimerTimeOut()
     {
+        dayLabel.text = "Day " + currentDay_.ToString() + ": " + timeOfDay[1];
+        DecisionHandler.Instance.DedicateTimeTo((Stats)dedicatedStatIndex);
+        dedicatedStatIndex = -1;
         LoseTime();
-        if(timeAvailable_ > 0)
-        {
+        if(timeAvailable_ > 0) {
             timer.RestartTimer();
         }
     }
 
-
-    /// <summary>
-    /// Notifies that a selection has been made.
-    /// </summary>
-    /// <param name="stat">The stat decision that was made.</param>
-    public void SelectionMade(Stats stat)
+    public void SetDedicatedStat(int i)
     {
-        timer.RestartTimer();
+        if(i < 0 || i > 2) { return; }
+        dedicatedStatIndex = i;
     }
 
     /// <summary>
@@ -115,7 +132,9 @@ public class DayManager : MonoBehaviour {
 
         for (int i = 0; i < numOfEvents; i++)
         {
-            todaysEvents.Add(GameEventManager.Instance.GetRandomEvent(currentDay_));
+            GameEvent ge = GameEventManager.Instance.GetRandomEvent(currentDay_);
+            if(ge == null) { break; }
+            todaysEvents.Add(ge);
         }
     }
     /****************************************************************************************************/

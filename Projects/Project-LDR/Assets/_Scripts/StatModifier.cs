@@ -19,4 +19,9 @@ public class StatModifier {
         damageMultiplier = 1;
         timeDedication = -1;
     }
+
+    public void Log()
+    {
+        Debug.Log("Gain multiplier: " + gainMultiplier.ToString() + "   Damage multiplier: " + damageMultiplier.ToString() + "   Time dedication: " + timeDedication.ToString());
+    }
 }

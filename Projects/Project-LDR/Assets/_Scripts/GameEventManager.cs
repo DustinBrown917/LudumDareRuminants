@@ -9,6 +9,7 @@ public class GameEventManager : MonoBehaviour {
     public static GameEventManager Instance { get { return instance_; } }
 
     [SerializeField] private GameEvent[] gameEvents;
+    private List<GameEvent> availableEvents = new List<GameEvent>();
 
     private void Awake()
     {
@@ -21,6 +22,17 @@ public class GameEventManager : MonoBehaviour {
         }
 
         SortEvents();
+        availableEvents = new List<GameEvent>(gameEvents);
+    }
+
+    private void Start()
+    {
+        DayManager.Instance.DayEnd += DayManager_DayEnd;
+    }
+
+    private void DayManager_DayEnd(object sender, DayManager.DayEndArgs e)
+    {
+        availableEvents = new List<GameEvent>(gameEvents);
     }
 
     private void OnDestroy()
@@ -39,15 +51,19 @@ public class GameEventManager : MonoBehaviour {
     {
         int maximumIndex = 0;
 
-        for(maximumIndex = 0; maximumIndex < gameEvents.Length; maximumIndex++)
+        for(maximumIndex = 0; maximumIndex < availableEvents.Count; maximumIndex++)
         {
-            if(gameEvents[maximumIndex].difficulty >= day)
+            if(gameEvents[maximumIndex].difficulty > day)
             {
                 break;
             }
         }
 
-        return gameEvents[UnityEngine.Random.Range(0, maximumIndex)];
+        if(availableEvents.Count == 0 || availableEvents[0].difficulty > day) { return null; }
+
+        GameEvent ge = availableEvents[UnityEngine.Random.Range(0, maximumIndex)];
+        availableEvents.Remove(ge);
+        return ge;
     }
 
     /// <summary>

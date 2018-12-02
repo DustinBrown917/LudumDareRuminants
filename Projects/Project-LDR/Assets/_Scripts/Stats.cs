@@ -6,6 +6,5 @@ public enum Stats {
 
 	SOCIAL,
     SLEEP,
-    SUCCESS,
-    TIME
+    SUCCESS
 }

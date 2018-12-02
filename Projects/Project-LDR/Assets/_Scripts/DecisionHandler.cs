@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class DecisionHandler : MonoBehaviour {
 
-    private static DecisionHandler instance_;
-    public static DecisionHandler Instance;
+    private static DecisionHandler instance_ = null;
+    public static DecisionHandler Instance { get { return instance_; } }
 
-    private Dictionary<Stats, StatModifier> statModifiers;
+    private Dictionary<Stats, StatModifier> statModifiers = new Dictionary<Stats, StatModifier>();
 
     private void Awake()
     {
+        Debug.Log("This");
         if(instance_ == null) { instance_ = this; }
         else if(instance_ != this) { Destroy(this.gameObject); }
         statModifiers.Add(Stats.SOCIAL, new StatModifier());
@@ -56,13 +57,19 @@ public class DecisionHandler : MonoBehaviour {
         if (!statModifiers.ContainsKey(stat)) { return; }
 
         statModifiers[stat].timeDedication += 1;
+        if(statModifiers[stat].timeDedication == 0) { statModifiers[stat].timeDedication = 1; }
+        Debug.Log("Time dedicated to: " + stat.ToString());
     }
 
     public void ExecuteDecisions()
     {
-        Player.Instance.ChangeSocial(statModifiers[Stats.SOCIAL].timeDedication * statModifiers[Stats.SOCIAL].gainMultiplier);
-        Player.Instance.ChangeSleep(statModifiers[Stats.SLEEP].timeDedication * statModifiers[Stats.SLEEP].gainMultiplier);
-        Player.Instance.ChangeSuccess(statModifiers[Stats.SUCCESS].timeDedication * statModifiers[Stats.SUCCESS].gainMultiplier);
+        Player.Instance.ChangeSocial(statModifiers[Stats.SOCIAL].timeDedication * ((statModifiers[Stats.SOCIAL].timeDedication > 0)? statModifiers[Stats.SOCIAL].gainMultiplier : statModifiers[Stats.SOCIAL].damageMultiplier));
+        Player.Instance.ChangeSleep(statModifiers[Stats.SLEEP].timeDedication * ((statModifiers[Stats.SLEEP].timeDedication > 0) ? statModifiers[Stats.SLEEP].gainMultiplier : statModifiers[Stats.SLEEP].damageMultiplier));
+        Player.Instance.ChangeSuccess(statModifiers[Stats.SUCCESS].timeDedication * ((statModifiers[Stats.SUCCESS].timeDedication > 0) ? statModifiers[Stats.SUCCESS].gainMultiplier : statModifiers[Stats.SUCCESS].damageMultiplier));
 
+        foreach(StatModifier sm in statModifiers.Values)
+        {
+            sm.Log();
+        }
     }
 }

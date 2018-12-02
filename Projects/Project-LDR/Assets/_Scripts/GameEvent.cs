@@ -15,18 +15,18 @@ public class GameEvent : ScriptableObject {
     public void ExecuteEvent()
     {
         StatModifier sm = DecisionHandler.Instance.GetStatModifier(statEffected);
-        if(sm == null) { return; }
 
-        switch (statEffected)
+        switch (action)
         {
-            case Stats.SOCIAL:
-
+            case GameEventActions.INSTANT_ADD:
                 break;
-            case Stats.SLEEP:
+            case GameEventActions.INSTANT_SUBTRACT:
                 break;
-            case Stats.SUCCESS:
+            case GameEventActions.MULTIPLY_GAIN:
+                sm.gainMultiplier += amount;
                 break;
-            case Stats.TIME:
+            case GameEventActions.MULTIPLY_DAMAGE:
+                sm.damageMultiplier += amount;
                 break;
             default:
                 break;

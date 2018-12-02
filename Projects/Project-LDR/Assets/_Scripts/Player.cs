@@ -31,6 +31,9 @@ public class Player : MonoBehaviour {
     {
         if(instance_ == null) { instance_ = this; }
         else if(instance_ != this) { Destroy(this.gameObject); }
+        currentSocial = maxSocial;
+        currentSleep = maxSleep;
+        currentSuccess = maxSuccess;
     }
 
     //Start and Update
@@ -43,9 +46,9 @@ public class Player : MonoBehaviour {
 
     private void Update()
     {
-        socialText.text = "Social: " + currentSocial;
-        sleepText.text = "Sleep: " + currentSleep;
-        successText.text = "Success: " + currentSuccess;
+        //socialText.text = "Social: " + currentSocial;
+        //sleepText.text = "Sleep: " + currentSleep;
+        //successText.text = "Success: " + currentSuccess;
 
 
         if (Input.GetKeyDown(KeyCode.Q))
@@ -81,18 +84,21 @@ public class Player : MonoBehaviour {
     public void ChangeSocial(float amount)
     {
         currentSocial = Mathf.Clamp(currentSocial + amount, 0, maxSocial);
+        Debug.Log("Social changed by: " + amount.ToString());
         SocialChanged.Invoke();
     }
 
     public void ChangeSleep(float amount)
     {
         currentSleep = Mathf.Clamp(currentSleep + amount, 0, maxSleep);
+        Debug.Log("Sleep changed by: " + amount.ToString());
         SleepChanged.Invoke();
     }
 
     public void ChangeSuccess(float amount)
     {
         currentSuccess = Mathf.Clamp(currentSuccess + amount, 0, maxSuccess);
+        Debug.Log("Success changed by: " + amount.ToString());
         SuccessChanged.Invoke();
     }
 }
