@@ -19,6 +19,9 @@ public class DayManager : MonoBehaviour {
     public const int TIME_IN_DAY = 2;
 
     public static readonly string[] dayTimeStrings = { "Morning", "Evening" };
+    [SerializeField] private Image dayTimeImage;
+    [SerializeField] private Sprite[] dayTimeImages;
+    private Coroutine cr_DayTimeImage;
 
     private TimeOfDay currentTimeOfDay_;
     public TimeOfDay CurrentTimeOfDay { get { return currentTimeOfDay_; } }
@@ -67,7 +70,9 @@ public class DayManager : MonoBehaviour {
     public void SetTimeOfDay(TimeOfDay tod)
     {
         currentTimeOfDay_ = tod;
-        dayLabel.text = "Day " + currentDay_.ToString() + ": " + currentTimeOfDay_.ToString();
+        dayLabel.text = "Day " + currentDay_.ToString();
+        dayTimeImage.sprite = dayTimeImages[(int)currentTimeOfDay_];
+        CoroutineManager.BeginCoroutine(CoroutineManager.ShrinkScaleFrom(dayTimeImage.transform, new Vector3(1.5f, 1.5f, 1.0f), Vector3.one, 0.25f), ref cr_DayTimeImage, this);
     }
 
     public void StartDay()

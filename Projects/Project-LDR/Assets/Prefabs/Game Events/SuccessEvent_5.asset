@@ -9,12 +9,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 60304af300712fa43b68bee6965b8ce9, type: 3}
-  m_Name: SleepEvent_2
+  m_Name: SuccessEvent_5
   m_EditorClassIdentifier: 
-  eventName: Feeling Ill
-  description: x2 Damage to sleep.
-  difficulty: 0
-  statEffected: 1
+  eventName: Elder Scrolls 15 Released
+  description: 4x Damage to Success
+  difficulty: 20
+  statEffected: 2
   action: 3
-  amount: 2
-  colourClassification: 8
+  amount: 4
+  colourClassification: 10

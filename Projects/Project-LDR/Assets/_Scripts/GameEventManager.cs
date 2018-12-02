@@ -11,6 +11,8 @@ public class GameEventManager : MonoBehaviour {
     [SerializeField] private GameEvent[] gameEvents;
     private List<GameEvent> availableEvents = new List<GameEvent>();
 
+    [SerializeField] private Color[] eventColours;
+
     private void Awake()
     {
         if(instance_ == null)
@@ -85,5 +87,12 @@ public class GameEventManager : MonoBehaviour {
                 }
             }
         }
+    }
+
+    public Color GetEventColour(int c)
+    {
+        if (c < 0 || c > eventColours.Length) { return eventColours[0]; }
+
+        return eventColours[c];
     }
 }

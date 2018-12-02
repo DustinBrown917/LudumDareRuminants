@@ -12,6 +12,8 @@ public class GameEvent : ScriptableObject {
     public GameEventActions action;
     public float amount;
 
+    public int colourClassification;
+
     public void ExecuteEvent()
     {
         StatModifier sm = DecisionHandler.Instance.GetStatModifier(statEffected);
@@ -23,10 +25,10 @@ public class GameEvent : ScriptableObject {
             case GameEventActions.INSTANT_SUBTRACT:
                 break;
             case GameEventActions.MULTIPLY_GAIN:
-                sm.gainMultiplier += amount;
+                sm.gainMultiplier *= amount;
                 break;
             case GameEventActions.MULTIPLY_DAMAGE:
-                sm.damageMultiplier += amount;
+                sm.damageMultiplier *= amount;
                 break;
             default:
                 break;

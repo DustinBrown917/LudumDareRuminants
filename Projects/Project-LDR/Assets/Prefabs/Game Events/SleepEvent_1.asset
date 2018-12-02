@@ -16,4 +16,5 @@ MonoBehaviour:
   difficulty: 0
   statEffected: 1
   action: 2
-  amount: 1
+  amount: 2
+  colourClassification: 3
