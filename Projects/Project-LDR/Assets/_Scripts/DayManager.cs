@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class DayManager : MonoBehaviour {
@@ -17,7 +18,10 @@ public class DayManager : MonoBehaviour {
     public const int DAY120_MAX_EVENTS = 7;
     public const int TIME_IN_DAY = 2;
 
-    public readonly string[] timeOfDay = { "Morning", "Evening" };
+    public static readonly string[] dayTimeStrings = { "Morning", "Evening" };
+
+    private TimeOfDay currentTimeOfDay_;
+    public TimeOfDay CurrentTimeOfDay { get { return currentTimeOfDay_; } }
 
     [SerializeField] private Timer timer;
     [SerializeField] private EventDisplayPanel edPanel;
@@ -28,7 +32,8 @@ public class DayManager : MonoBehaviour {
     [SerializeField] private int currentDay_ = 1;
     public int CurrentDay { get { return currentDay_; } }
 
-    private int dedicatedStatIndex = -1;
+    private int dedicatedStatIndex_ = -1;
+    public int DedicatedStatIndex { get { return dedicatedStatIndex_; } }
 
     [SerializeField] private List<GameEvent> todaysEvents = new List<GameEvent>();
 
@@ -59,10 +64,16 @@ public class DayManager : MonoBehaviour {
         StartDay();
     }
 
+    public void SetTimeOfDay(TimeOfDay tod)
+    {
+        currentTimeOfDay_ = tod;
+        dayLabel.text = "Day " + currentDay_.ToString() + ": " + currentTimeOfDay_.ToString();
+    }
+
     public void StartDay()
     {
         currentDay_++;
-        dayLabel.text = "Day " + currentDay_.ToString() + ": " + timeOfDay[0];
+        SetTimeOfDay(TimeOfDay.Morning);
         timeAvailable_ = TIME_IN_DAY;
 
         GetTodaysEvents();
@@ -96,9 +107,9 @@ public class DayManager : MonoBehaviour {
 
     public void HandleTimerTimeOut()
     {
-        dayLabel.text = "Day " + currentDay_.ToString() + ": " + timeOfDay[1];
-        DecisionHandler.Instance.DedicateTimeTo((Stats)dedicatedStatIndex);
-        dedicatedStatIndex = -1;
+        SetTimeOfDay(TimeOfDay.Evening);
+        DecisionHandler.Instance.DedicateTimeTo((Stats)dedicatedStatIndex_);
+        dedicatedStatIndex_ = -1;
         LoseTime();
         if(timeAvailable_ > 0) {
             timer.RestartTimer();
@@ -108,7 +119,9 @@ public class DayManager : MonoBehaviour {
     public void SetDedicatedStat(int i)
     {
         if(i < 0 || i > 2) { return; }
-        dedicatedStatIndex = i;
+        dedicatedStatIndex_ = i;
+        if(currentTimeOfDay_ == TimeOfDay.Morning) { MorningDedicationChanged.Invoke(); }
+        else if(currentTimeOfDay_ == TimeOfDay.Evening) { EveningDedicationChanged.Invoke(); }
     }
 
     /// <summary>
@@ -140,6 +153,9 @@ public class DayManager : MonoBehaviour {
     /****************************************************************************************************/
     /********************************************** EVENTS **********************************************/
     /****************************************************************************************************/
+
+    public UnityEvent MorningDedicationChanged;
+    public UnityEvent EveningDedicationChanged;
 
     #region DayStarted event.
     public event EventHandler<DayStartArgs> DayStarted;
@@ -190,4 +206,10 @@ public class DayManager : MonoBehaviour {
         }
     }
     #endregion
+
+    public enum TimeOfDay
+    {
+        Morning,
+        Evening
+    }
 }
