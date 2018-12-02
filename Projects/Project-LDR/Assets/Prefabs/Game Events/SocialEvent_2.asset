@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: SocialEvent_2
   m_EditorClassIdentifier: 
   eventName: Date Night
-  description: Social damage doubled
+  description: x2 Damage to Social
   difficulty: 0
   statEffected: 0
   action: 3

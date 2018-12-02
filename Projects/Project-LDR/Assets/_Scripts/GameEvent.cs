@@ -10,7 +10,7 @@ public class GameEvent : ScriptableObject {
     public int difficulty;
     public Stats statEffected;
     public GameEventActions action;
-    public int amount;
+    public float amount;
 
     public void ExecuteEvent()
     {

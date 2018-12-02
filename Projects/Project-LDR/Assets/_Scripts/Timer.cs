@@ -70,7 +70,7 @@ public class Timer : MonoBehaviour {
         timerText.text = text;
         if (withAnimation)
         {
-            CoroutineManager.BeginCoroutine(CoroutineManager.ShrinkScaleFrom(timerTextTransform, new Vector3(2.0f, 2.0f, 2.0f), Vector3.one, 1.0f, cr_TextScaling), ref cr_TextScaling, this);
+            CoroutineManager.BeginCoroutine(CoroutineManager.ShrinkScaleFrom(timerTextTransform, new Vector3(2.0f, 2.0f, 2.0f), Vector3.one, 1.0f), ref cr_TextScaling, this);
         }
     }
 

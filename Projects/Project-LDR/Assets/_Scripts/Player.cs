@@ -22,11 +22,6 @@ public class Player : MonoBehaviour {
     public UnityEvent SleepChanged;
     public UnityEvent SuccessChanged;
 
-    public Text socialText;
-    public Text sleepText;
-    public Text successText;
-    public GameObject playerObj;
-
     private void Awake()
     {
         if(instance_ == null) { instance_ = this; }
@@ -46,10 +41,6 @@ public class Player : MonoBehaviour {
 
     private void Update()
     {
-        //socialText.text = "Social: " + currentSocial;
-        //sleepText.text = "Sleep: " + currentSleep;
-        //successText.text = "Success: " + currentSuccess;
-
 
         if (Input.GetKeyDown(KeyCode.Q))
         {

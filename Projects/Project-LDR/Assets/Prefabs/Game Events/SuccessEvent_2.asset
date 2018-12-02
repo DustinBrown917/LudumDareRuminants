@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: SuccessEvent_2
   m_EditorClassIdentifier: 
   eventName: Test Tomorrow
-  description: Study Damage Doubled
+  description: x2 Damage to Success
   difficulty: 0
   statEffected: 2
   action: 3

@@ -12,16 +12,6 @@ public class EventDisplayPanel : MonoBehaviour {
         SetUpEventDisplays();
     }
 
-    // Use this for initialization
-    void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-
     private void SetUpEventDisplays()
     {
         eventDisplays = new EventDisplay[DayManager.DAY120_MAX_EVENTS];
@@ -38,9 +28,9 @@ public class EventDisplayPanel : MonoBehaviour {
         for (int i = 0; i < eventDisplays.Length; i++)
         {
             if (i < events.Count)
-            {
-                eventDisplays[i].SetEvent(events[i]);
+            {               
                 eventDisplays[i].gameObject.SetActive(true);
+                eventDisplays[i].SetEvent(events[i]);
             }
             else
             {
