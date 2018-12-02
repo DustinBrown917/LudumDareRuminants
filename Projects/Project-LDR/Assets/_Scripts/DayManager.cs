@@ -84,11 +84,20 @@ public class DayManager : MonoBehaviour {
         }
     }
 
-    public void SelectionMade()
+
+    /// <summary>
+    /// Notifies that a selection has been made.
+    /// </summary>
+    /// <param name="stat">The stat decision that was made.</param>
+    public void SelectionMade(Stats stat)
     {
         timer.RestartTimer();
     }
 
+    /// <summary>
+    /// Gets the number of events to spawn for this day.
+    /// </summary>
+    /// <returns>The number of events to spawn.</returns>
     public int GetNumOfEventsToday()
     {
         int minEvents = (int)Mathf.Lerp(DAY1_MIN_EVENTS, DAY120_MIN_EVENTS, (float)currentDay_ / (float)MaximumDay);
@@ -97,6 +106,9 @@ public class DayManager : MonoBehaviour {
         return UnityEngine.Random.Range(minEvents, maxEvents + 1);
     }
 
+    /// <summary>
+    /// Populates the events for the day.
+    /// </summary>
     public void GetTodaysEvents()
     {
         int numOfEvents = GetNumOfEventsToday();

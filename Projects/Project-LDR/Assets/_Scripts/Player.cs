@@ -1,23 +1,37 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class Player : MonoBehaviour {
 
-    //Member Variables
-    public int maxSocial;
-    public int maxSleep;
-    public int maxSuccess;
+    private static Player instance_;
+    public static Player Instance { get { return instance_; } }
 
-    public int currentSocial;
-    public int currentSleep;
-    public int currentSuccess;
+    //Member Variables
+    public float maxSocial;
+    public float maxSleep;
+    public float maxSuccess;
+
+    public float currentSocial;
+    public float currentSleep;
+    public float currentSuccess;
+
+    public UnityEvent SocialChanged;
+    public UnityEvent SleepChanged;
+    public UnityEvent SuccessChanged;
 
     public Text socialText;
     public Text sleepText;
     public Text successText;
     public GameObject playerObj;
+
+    private void Awake()
+    {
+        if(instance_ == null) { instance_ = this; }
+        else if(instance_ != this) { Destroy(this.gameObject); }
+    }
 
     //Start and Update
     private void Start()
@@ -64,18 +78,21 @@ public class Player : MonoBehaviour {
 
     }
 
-    public void ChangeSocial(int amount)
+    public void ChangeSocial(float amount)
     {
-        currentSocial += amount;
+        currentSocial = Mathf.Clamp(currentSocial + amount, 0, maxSocial);
+        SocialChanged.Invoke();
     }
 
-    public void ChangeSleep(int amount)
+    public void ChangeSleep(float amount)
     {
-        currentSleep += amount;
+        currentSleep = Mathf.Clamp(currentSleep + amount, 0, maxSleep);
+        SleepChanged.Invoke();
     }
 
-    public void ChangeSuccess(int amount)
+    public void ChangeSuccess(float amount)
     {
-        currentSuccess += amount;
+        currentSuccess = Mathf.Clamp(currentSuccess + amount, 0, maxSuccess);
+        SuccessChanged.Invoke();
     }
 }
