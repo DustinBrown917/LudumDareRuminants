@@ -26,6 +26,9 @@ public class DayManager : MonoBehaviour {
     private TimeOfDay currentTimeOfDay_;
     public TimeOfDay CurrentTimeOfDay { get { return currentTimeOfDay_; } }
 
+    [SerializeField] private Text countdownText;
+    private Coroutine cr_CountdownText;
+
     [SerializeField] private Timer timer;
     [SerializeField] private EventDisplayPanel edPanel;
     [SerializeField] private Text dayLabel;
@@ -40,6 +43,8 @@ public class DayManager : MonoBehaviour {
 
     [SerializeField] private List<GameEvent> todaysEvents = new List<GameEvent>();
 
+    private Coroutine cr_BeginDay;
+
     private void Awake()
     {
         if(instance_ == null) {
@@ -51,11 +56,43 @@ public class DayManager : MonoBehaviour {
         timer.TimeUp.AddListener(HandleTimerTimeOut);
     }
 
+    private void Start()
+    {
+        GameManager.Instance.CurtainOpened += GameManager_CurtainOpened;
+    }
+
+    private void GameManager_CurtainOpened(object sender, EventArgs e)
+    {
+        CoroutineManager.BeginCoroutine(StartDayTimer(), ref cr_BeginDay, this);
+    }
+
+    private IEnumerator StartDayTimer()
+    {
+        countdownText.gameObject.SetActive(true);
+        int countDownSeconds = 3;
+        while(countDownSeconds > 0)
+        {
+            UpdateCountdownLabel(countDownSeconds);
+            countDownSeconds -= 1;
+            yield return new WaitForSeconds(1.0f);
+        }
+        countdownText.gameObject.SetActive(false);
+        StartDay();
+        GameManager.Instance.SetPlay(true);
+    }
+
+    private void UpdateCountdownLabel(int timeLeft)
+    {
+        countdownText.text = timeLeft.ToString();
+        CoroutineManager.BeginCoroutine(CoroutineManager.ShrinkScaleFrom(countdownText.transform, new Vector3(1.5f, 1.5f, 1.0f), Vector3.one, 1.0f), ref cr_CountdownText, this);
+    }
+
     private void OnDestroy()
     {
         if(instance_ == this) {
             instance_ = null;
         }
+        GameManager.Instance.CurtainOpened -= GameManager_CurtainOpened;
     }
 
     public void EndDay()
@@ -123,7 +160,7 @@ public class DayManager : MonoBehaviour {
 
     public void SetDedicatedStat(int i)
     {
-        if(i < 0 || i > 2) { return; }
+        if(i < 0 || i > 2 || !GameManager.Instance.Play) { return; }
         dedicatedStatIndex_ = i;
         if(currentTimeOfDay_ == TimeOfDay.Morning) { MorningDedicationChanged.Invoke(); }
         else if(currentTimeOfDay_ == TimeOfDay.Evening) { EveningDedicationChanged.Invoke(); }

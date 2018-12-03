@@ -75,21 +75,21 @@ public class Player : MonoBehaviour {
     public void ChangeSocial(float amount)
     {
         currentSocial = Mathf.Clamp(currentSocial + amount, 0, maxSocial);
-        Debug.Log("Social changed by: " + amount.ToString());
         SocialChanged.Invoke();
+        if (currentSocial <= 0) { GameManager.Instance.LoseGame(Stats.SOCIAL); }
     }
 
     public void ChangeSleep(float amount)
     {
         currentSleep = Mathf.Clamp(currentSleep + amount, 0, maxSleep);
-        Debug.Log("Sleep changed by: " + amount.ToString());
         SleepChanged.Invoke();
+        if (currentSleep <= 0) { GameManager.Instance.LoseGame(Stats.SLEEP); }
     }
 
     public void ChangeSuccess(float amount)
     {
         currentSuccess = Mathf.Clamp(currentSuccess + amount, 0, maxSuccess);
-        Debug.Log("Success changed by: " + amount.ToString());
         SuccessChanged.Invoke();
+        if(currentSuccess <= 0) { GameManager.Instance.LoseGame(Stats.SUCCESS); }
     }
 }
