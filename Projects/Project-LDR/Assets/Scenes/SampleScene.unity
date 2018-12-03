@@ -2945,6 +2945,121 @@ Prefab:
       propertyPath: startFromTime
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 114064840130109504, guid: e7e96a3e76d5ae54d912fc70d314b192,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114839294036788314, guid: e7e96a3e76d5ae54d912fc70d314b192,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114751912260836184, guid: e7e96a3e76d5ae54d912fc70d314b192,
+        type: 2}
+      propertyPath: m_Color.r
+      value: 0.20784315
+      objectReference: {fileID: 0}
+    - target: {fileID: 114751912260836184, guid: e7e96a3e76d5ae54d912fc70d314b192,
+        type: 2}
+      propertyPath: m_Color.g
+      value: 0.3803922
+      objectReference: {fileID: 0}
+    - target: {fileID: 114751912260836184, guid: e7e96a3e76d5ae54d912fc70d314b192,
+        type: 2}
+      propertyPath: m_Color.b
+      value: 0.16078432
+      objectReference: {fileID: 0}
+    - target: {fileID: 114040445911983310, guid: e7e96a3e76d5ae54d912fc70d314b192,
+        type: 2}
+      propertyPath: m_Color.r
+      value: 0.86274517
+      objectReference: {fileID: 0}
+    - target: {fileID: 114040445911983310, guid: e7e96a3e76d5ae54d912fc70d314b192,
+        type: 2}
+      propertyPath: m_Color.g
+      value: 0.8313726
+      objectReference: {fileID: 0}
+    - target: {fileID: 114040445911983310, guid: e7e96a3e76d5ae54d912fc70d314b192,
+        type: 2}
+      propertyPath: m_Color.b
+      value: 0.78823537
+      objectReference: {fileID: 0}
+    - target: {fileID: 114064840130109504, guid: e7e96a3e76d5ae54d912fc70d314b192,
+        type: 2}
+      propertyPath: m_UseGraphicAlpha
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114064840130109504, guid: e7e96a3e76d5ae54d912fc70d314b192,
+        type: 2}
+      propertyPath: m_EffectDistance.x
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 114064840130109504, guid: e7e96a3e76d5ae54d912fc70d314b192,
+        type: 2}
+      propertyPath: m_EffectDistance.y
+      value: -12
+      objectReference: {fileID: 0}
+    - target: {fileID: 114839294036788314, guid: e7e96a3e76d5ae54d912fc70d314b192,
+        type: 2}
+      propertyPath: m_EffectDistance.x
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 114839294036788314, guid: e7e96a3e76d5ae54d912fc70d314b192,
+        type: 2}
+      propertyPath: m_EffectDistance.y
+      value: -16
+      objectReference: {fileID: 0}
+    - target: {fileID: 114751912260836184, guid: e7e96a3e76d5ae54d912fc70d314b192,
+        type: 2}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114064840130109504, guid: e7e96a3e76d5ae54d912fc70d314b192,
+        type: 2}
+      propertyPath: m_EffectColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114839294036788314, guid: e7e96a3e76d5ae54d912fc70d314b192,
+        type: 2}
+      propertyPath: m_EffectColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114839294036788314, guid: e7e96a3e76d5ae54d912fc70d314b192,
+        type: 2}
+      propertyPath: m_UseGraphicAlpha
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114839294036788314, guid: e7e96a3e76d5ae54d912fc70d314b192,
+        type: 2}
+      propertyPath: m_EffectColor.r
+      value: 0.3018868
+      objectReference: {fileID: 0}
+    - target: {fileID: 114839294036788314, guid: e7e96a3e76d5ae54d912fc70d314b192,
+        type: 2}
+      propertyPath: m_EffectColor.g
+      value: 0.29049483
+      objectReference: {fileID: 0}
+    - target: {fileID: 114839294036788314, guid: e7e96a3e76d5ae54d912fc70d314b192,
+        type: 2}
+      propertyPath: m_EffectColor.b
+      value: 0.2748309
+      objectReference: {fileID: 0}
+    - target: {fileID: 114064840130109504, guid: e7e96a3e76d5ae54d912fc70d314b192,
+        type: 2}
+      propertyPath: m_EffectColor.r
+      value: 0.116011046
+      objectReference: {fileID: 0}
+    - target: {fileID: 114064840130109504, guid: e7e96a3e76d5ae54d912fc70d314b192,
+        type: 2}
+      propertyPath: m_EffectColor.g
+      value: 0.20754719
+      objectReference: {fileID: 0}
+    - target: {fileID: 114064840130109504, guid: e7e96a3e76d5ae54d912fc70d314b192,
+        type: 2}
+      propertyPath: m_EffectColor.b
+      value: 0.09104664
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e7e96a3e76d5ae54d912fc70d314b192, type: 2}
   m_IsPrefabAsset: 0
