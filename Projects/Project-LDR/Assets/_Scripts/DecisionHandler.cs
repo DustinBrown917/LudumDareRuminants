@@ -11,7 +11,6 @@ public class DecisionHandler : MonoBehaviour {
 
     private void Awake()
     {
-        Debug.Log("This");
         if(instance_ == null) { instance_ = this; }
         else if(instance_ != this) { Destroy(this.gameObject); }
         statModifiers.Add(Stats.SOCIAL, new StatModifier());

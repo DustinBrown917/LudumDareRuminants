@@ -10,21 +10,24 @@ public class PlayerManager : MonoBehaviour {
     [SerializeField] private Transform doNothingTransform;
 
     [SerializeField] Transform playerTransform;
+    private SpriteRenderer playerSpriteRenderer;
+
+    [SerializeField] private Sprite mainGraphic;
+    [SerializeField] private Sprite deskGraphic;
+    [SerializeField] private Sprite bedGraphic;
 
     private Coroutine cr_Moving;
 
 	// Use this for initialization
 	void Start () {
-		
+        playerSpriteRenderer = playerTransform.gameObject.GetComponent<SpriteRenderer>();
 	}
 	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
     public void MovePlayerTo()
     {
+        playerSpriteRenderer.enabled = true;
+        playerSpriteRenderer.sprite = mainGraphic;
         Stats s = (Stats)DayManager.Instance.DedicatedStatIndex;
         Transform t = null;
 
@@ -43,11 +46,29 @@ public class PlayerManager : MonoBehaviour {
                 t = doNothingTransform;
                 break;
         }
-
-        CoroutineManager.BeginCoroutine(LerpTo(playerTransform, t.position, 1.0f), ref cr_Moving, this);
+        
+        CoroutineManager.BeginCoroutine(LerpTo(playerTransform, t.position, 1.0f, s), ref cr_Moving, this);
     }
 
-    public static IEnumerator LerpTo(Transform trans, Vector3 targetPosition, float totalTime)
+    public void HandleArriveAtLocation(Stats s)
+    {
+        switch (s)
+        {
+            case Stats.SOCIAL:
+                playerSpriteRenderer.enabled = false;
+                break;
+            case Stats.SLEEP:
+                playerSpriteRenderer.sprite = bedGraphic;
+                break;
+            case Stats.SUCCESS:
+                playerSpriteRenderer.sprite = deskGraphic;
+                break;
+            default:
+                break;
+        }
+    }
+
+    public IEnumerator LerpTo(Transform trans, Vector3 targetPosition, float totalTime, Stats s)
     {
         Vector3 initialPosition = trans.position;
         targetPosition.z = initialPosition.z;
@@ -62,6 +83,8 @@ public class PlayerManager : MonoBehaviour {
         }
 
         trans.position = targetPosition;
-
+        HandleArriveAtLocation(s);
     }
+
+
 }
