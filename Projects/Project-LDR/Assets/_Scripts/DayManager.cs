@@ -12,10 +12,10 @@ public class DayManager : MonoBehaviour {
     public static DayManager Instance { get { return instance_; } }
 
     public const int MaximumDay = 120; //Should probably source this out to GameManager.
-    public const int DAY1_MIN_EVENTS = 1;
+    public const int DAY1_MIN_EVENTS = 0;
     public const int DAY120_MIN_EVENTS = 5;
-    public const int DAY1_MAX_EVENTS = 1;
-    public const int DAY120_MAX_EVENTS = 7;
+    public const int DAY1_MAX_EVENTS = 2;
+    public const int DAY120_MAX_EVENTS = 6;
     public const int TIME_IN_DAY = 2;
 
     public static readonly string[] dayTimeStrings = { "Morning", "Evening" };
