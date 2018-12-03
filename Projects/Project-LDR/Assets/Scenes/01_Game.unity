@@ -330,7 +330,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Day 120
+  m_Text: Day 0
 --- !u!222 &59531633
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -997,7 +997,7 @@ MonoBehaviour:
   edPanel: {fileID: 1105160035}
   dayLabel: {fileID: 59531632}
   timeAvailable_: 0
-  currentDay_: 120
+  currentDay_: 0
   todaysEvents: []
   MorningDedicationChanged:
     m_PersistentCalls:

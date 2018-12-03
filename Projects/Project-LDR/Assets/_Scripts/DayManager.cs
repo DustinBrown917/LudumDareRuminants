@@ -101,6 +101,11 @@ public class DayManager : MonoBehaviour {
 
         OnDayEnd(new DayEndArgs(currentDay_));
 
+        if(currentDay_ == MaximumDay)
+        {
+            GameManager.Instance.WinGame();
+        }
+
         StartDay();
     }
 

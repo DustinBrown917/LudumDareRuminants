@@ -58,6 +58,12 @@ public class GameManager : MonoBehaviour {
         LoadScene("02_GameOver");
     }
 
+    public void WinGame()
+    {
+        play_ = false;
+        LoadScene("03_GameWon");
+    }
+
     public void LoadScene(string scene)
     {
         sceneToLoad = scene;
