@@ -77,8 +77,8 @@ public class DayManager : MonoBehaviour {
             yield return new WaitForSeconds(1.0f);
         }
         countdownText.gameObject.SetActive(false);
-        StartDay();
         GameManager.Instance.SetPlay(true);
+        StartDay();       
     }
 
     private void UpdateCountdownLabel(int timeLeft)
@@ -114,6 +114,7 @@ public class DayManager : MonoBehaviour {
 
     public void StartDay()
     {
+        if (!GameManager.Instance.Play) { return; }
         currentDay_++;
         SetTimeOfDay(TimeOfDay.Morning);
         timeAvailable_ = TIME_IN_DAY;

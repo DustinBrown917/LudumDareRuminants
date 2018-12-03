@@ -19,6 +19,9 @@ public class GameManager : MonoBehaviour {
 
     private string sceneToLoad;
 
+    private Stats gameLostBy_;
+    public Stats GameLostBy { get { return gameLostBy_; } }
+
     private void Awake()
     {
         if (instance_ == null) {
@@ -49,7 +52,10 @@ public class GameManager : MonoBehaviour {
 
     public void LoseGame(Stats stat)
     {
-
+        gameLostBy_ = stat;
+        play_ = false;
+        OnGameLost();
+        LoadScene("02_GameOver");
     }
 
     public void LoadScene(string scene)
@@ -116,6 +122,18 @@ public class GameManager : MonoBehaviour {
     private void OnCurtainOpened()
     {
         EventHandler handler = CurtainOpened;
+
+        if (handler != null)
+        {
+            handler(this, EventArgs.Empty);
+        }
+    }
+
+    public event EventHandler GameLost;
+
+    private void OnGameLost()
+    {
+        EventHandler handler = GameLost;
 
         if (handler != null)
         {
