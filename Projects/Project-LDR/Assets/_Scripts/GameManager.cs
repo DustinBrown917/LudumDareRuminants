@@ -35,6 +35,7 @@ public class GameManager : MonoBehaviour {
     // Use this for initialization
     void Start () {
         SceneManager.sceneLoaded += SceneManager_sceneLoaded;
+        Screen.SetResolution(1280, 720, false);
     }
 
     private void OnDestroy()
