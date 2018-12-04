@@ -17,9 +17,19 @@ public class PlayerManager : MonoBehaviour {
     [SerializeField] private Sprite bedGraphic;
 
     private Coroutine cr_Moving;
+    private AudioSource audioSource;
 
-	// Use this for initialization
-	void Start () {
+    [SerializeField] private AudioClip socialClip;
+    [SerializeField] private AudioClip sleepClip;
+    [SerializeField] private AudioClip successClip;
+
+    private void Awake()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
+
+    // Use this for initialization
+    void Start () {
         playerSpriteRenderer = playerTransform.gameObject.GetComponent<SpriteRenderer>();
 	}
 	
@@ -56,16 +66,21 @@ public class PlayerManager : MonoBehaviour {
         {
             case Stats.SOCIAL:
                 playerSpriteRenderer.enabled = false;
+                audioSource.clip = socialClip;
                 break;
             case Stats.SLEEP:
                 playerSpriteRenderer.sprite = bedGraphic;
+                audioSource.clip = sleepClip;
                 break;
             case Stats.SUCCESS:
                 playerSpriteRenderer.sprite = deskGraphic;
+                audioSource.clip = successClip;
                 break;
             default:
                 break;
         }
+
+        audioSource.Play();
     }
 
     public IEnumerator LerpTo(Transform trans, Vector3 targetPosition, float totalTime, Stats s)

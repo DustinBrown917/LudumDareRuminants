@@ -43,6 +43,11 @@ public class DayManager : MonoBehaviour {
 
     [SerializeField] private List<GameEvent> todaysEvents = new List<GameEvent>();
 
+    [SerializeField] private AudioSource musicSource;
+    [SerializeField] private AudioSource clickEffectSource;
+    [SerializeField] private AudioSource dayEffectSource;
+    
+
     private Coroutine cr_BeginDay;
 
     private void Awake()
@@ -78,6 +83,7 @@ public class DayManager : MonoBehaviour {
         }
         countdownText.gameObject.SetActive(false);
         GameManager.Instance.SetPlay(true);
+        musicSource.Play();
         StartDay();       
     }
 
@@ -100,6 +106,8 @@ public class DayManager : MonoBehaviour {
         todaysEvents = new List<GameEvent>();
 
         OnDayEnd(new DayEndArgs(currentDay_));
+
+        dayEffectSource.Play();
 
         if(currentDay_ == MaximumDay)
         {
@@ -168,6 +176,7 @@ public class DayManager : MonoBehaviour {
     {
         if(i < 0 || i > 2 || !GameManager.Instance.Play) { return; }
         dedicatedStatIndex_ = i;
+        clickEffectSource.Play();
         if(currentTimeOfDay_ == TimeOfDay.Morning) { MorningDedicationChanged.Invoke(); }
         else if(currentTimeOfDay_ == TimeOfDay.Evening) { EveningDedicationChanged.Invoke(); }
     }
