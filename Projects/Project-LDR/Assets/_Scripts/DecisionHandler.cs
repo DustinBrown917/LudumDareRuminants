@@ -45,10 +45,7 @@ public class DecisionHandler : MonoBehaviour {
 
     private void OnDestroy()
     {
-        if(instance_ == this)
-        {
-            instance_ = null;
-        }
+        if(instance_ == this) { instance_ = null; }
     }
 
     public void DedicateTimeTo(Stats stat)
@@ -57,7 +54,6 @@ public class DecisionHandler : MonoBehaviour {
 
         statModifiers[stat].timeDedication += 1;
         if(statModifiers[stat].timeDedication == 0) { statModifiers[stat].timeDedication = 1; }
-        Debug.Log("Time dedicated to: " + stat.ToString());
     }
 
     public void ExecuteDecisions()
@@ -65,10 +61,5 @@ public class DecisionHandler : MonoBehaviour {
         Player.Instance.ChangeSocial(statModifiers[Stats.SOCIAL].timeDedication * ((statModifiers[Stats.SOCIAL].timeDedication > 0)? statModifiers[Stats.SOCIAL].gainMultiplier : statModifiers[Stats.SOCIAL].damageMultiplier));
         Player.Instance.ChangeSleep(statModifiers[Stats.SLEEP].timeDedication * ((statModifiers[Stats.SLEEP].timeDedication > 0) ? statModifiers[Stats.SLEEP].gainMultiplier : statModifiers[Stats.SLEEP].damageMultiplier));
         Player.Instance.ChangeSuccess(statModifiers[Stats.SUCCESS].timeDedication * ((statModifiers[Stats.SUCCESS].timeDedication > 0) ? statModifiers[Stats.SUCCESS].gainMultiplier : statModifiers[Stats.SUCCESS].damageMultiplier));
-
-        foreach(StatModifier sm in statModifiers.Values)
-        {
-            sm.Log();
-        }
     }
 }

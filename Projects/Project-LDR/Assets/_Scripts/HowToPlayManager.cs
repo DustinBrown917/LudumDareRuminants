@@ -23,10 +23,11 @@ public class HowToPlayManager : MonoBehaviour {
     // Update is called once per frame
     void Update () {
         
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space)||Input.GetMouseButtonDown(0))
         {
             if (currentPhase >= phases.Length) { GameManager.Instance.LoadScene("00a_MainMenu"); }
-            phases[currentPhase].Next();
+            else { phases[currentPhase].Next(); }
+            
         }
 	}
 

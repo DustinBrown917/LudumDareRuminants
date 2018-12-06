@@ -9,12 +9,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 60304af300712fa43b68bee6965b8ce9, type: 3}
-  m_Name: SleepEvent_4
+  m_Name: SuccessEvent_6
   m_EditorClassIdentifier: 
-  eventName: Coffee to the Rescue
-  description: Damage to sleep halved.
-  difficulty: 0
-  statEffected: 1
-  action: 3
-  amount: 0.5
-  colourClassification: 1
+  eventName: Didn't Do the Reading
+  description: Study time worth 1/4
+  difficulty: 20
+  statEffected: 2
+  action: 2
+  amount: 0.25
+  colourClassification: 10

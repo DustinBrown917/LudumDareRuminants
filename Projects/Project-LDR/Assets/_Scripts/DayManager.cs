@@ -13,6 +13,8 @@ public class DayManager : MonoBehaviour {
 
     public const int MaximumDay = 120; //Should probably source this out to GameManager.
     public const int DAY1_MIN_EVENTS = 0;
+    public const float DAY1_TIME = 5.0f;
+    public const float DAY120_TIME = 1.5f;
     public const int DAY120_MIN_EVENTS = 5;
     public const int DAY1_MAX_EVENTS = 2;
     public const int DAY120_MAX_EVENTS = 6;
@@ -154,7 +156,7 @@ public class DayManager : MonoBehaviour {
     public void LoseTime()
     {
         timeAvailable_ -= 1;
-        Debug.Log("Time lost. Time remaining: " + timeAvailable_.ToString());
+
         if(timeAvailable_ == 0)
         {
             EndDay();
@@ -168,6 +170,7 @@ public class DayManager : MonoBehaviour {
         dedicatedStatIndex_ = -1;
         LoseTime();
         if(timeAvailable_ > 0) {
+            timer.SetStartTime(Mathf.Lerp(DAY1_TIME, DAY120_TIME, (float)currentDay_ / (float)MaximumDay));
             timer.RestartTimer();
         }
     }
@@ -229,7 +232,6 @@ public class DayManager : MonoBehaviour {
 
     private void OnDayStarted(DayStartArgs e)
     {
-        Debug.Log("Day started.");
         EventHandler<DayStartArgs> handler = DayStarted;
 
         if(handler != null)
@@ -254,7 +256,6 @@ public class DayManager : MonoBehaviour {
 
     private void OnDayEnd(DayEndArgs e)
     {
-        Debug.Log("Day ended.");
         EventHandler<DayEndArgs> handler = DayEnd;
         
         if(handler != null)

@@ -67,20 +67,21 @@ public class PlayerManager : MonoBehaviour {
             case Stats.SOCIAL:
                 playerSpriteRenderer.enabled = false;
                 audioSource.clip = socialClip;
+                audioSource.Play();
                 break;
             case Stats.SLEEP:
                 playerSpriteRenderer.sprite = bedGraphic;
                 audioSource.clip = sleepClip;
+                audioSource.Play();
                 break;
             case Stats.SUCCESS:
                 playerSpriteRenderer.sprite = deskGraphic;
                 audioSource.clip = successClip;
+                audioSource.Play();
                 break;
             default:
                 break;
-        }
-
-        audioSource.Play();
+        }       
     }
 
     public IEnumerator LerpTo(Transform trans, Vector3 targetPosition, float totalTime, Stats s)

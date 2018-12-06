@@ -17,6 +17,7 @@ public class Timer : MonoBehaviour {
     private Coroutine cr_timerRunning = null;
 
     [SerializeField, Tooltip("The time the timer should start from.")] private float startFromTime = 10;
+    
 
 	// Use this for initialization
 	void Start () {
@@ -29,6 +30,11 @@ public class Timer : MonoBehaviour {
     public void StartTimer()
     {
         CoroutineManager.BeginCoroutine(RunTimer(startFromTime), ref cr_timerRunning, this);
+    }
+
+    public void SetStartTime(float t)
+    {
+        startFromTime = t;
     }
 
     /// <summary>
